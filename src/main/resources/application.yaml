@@ -1,6 +1,12 @@
 spring:
   application:
     name: stew-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: appuser
+    password: password
+    driver-class-name: org.postgresql.Driver
+
 mybatis:
   mapper-locations: classpath:com/example/stew/**/mapper/*.xml
 
