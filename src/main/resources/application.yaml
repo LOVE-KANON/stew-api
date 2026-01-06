@@ -1,3 +1,6 @@
 spring:
   application:
     name: stew-api
+mybatis:
+  mapper-locations: classpath:com/example/stew/**/mapper/*.xml
+
