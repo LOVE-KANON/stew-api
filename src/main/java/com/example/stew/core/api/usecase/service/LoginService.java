@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 public class LoginService {
 
     public LoginResponse login(LoginRequest request) {
-        return new LoginResponse();
+        return new LoginResponse(true, "ログイン成功");
     }
 }
