@@ -1,4 +1,4 @@
-package com.example.stew.core.base.config;
+package com.example.stew.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
