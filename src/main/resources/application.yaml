@@ -9,4 +9,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:com/example/stew/**/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
