@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stew.core.api.usecase.controller.dto.login.LoginRequest;
 import com.example.stew.core.api.usecase.controller.dto.login.LoginResponse;
+import com.example.stew.core.api.usecase.controller.dto.login.LogoutRequest;
+import com.example.stew.core.api.usecase.controller.dto.login.LogoutResponse;
 import com.example.stew.core.api.usecase.service.LoginService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,5 +25,9 @@ public class LoginController {
     public LoginResponse login(@RequestBody LoginRequest request, HttpSession session) {
         return loginService.login(request, session);
     }
+
+    @PostMapping("/logout")
+    public LogoutResponse logout(@RequestBody LogoutRequest request, HttpSession session) {
+        return loginService.logout(request, session);
     }
 }

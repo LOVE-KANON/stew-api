@@ -6,6 +6,8 @@ import com.example.stew.core.api.resource.entity.CoreUserEntity;
 import com.example.stew.core.api.resource.mapper.CoreUserMapper;
 import com.example.stew.core.api.usecase.controller.dto.login.LoginRequest;
 import com.example.stew.core.api.usecase.controller.dto.login.LoginResponse;
+import com.example.stew.core.api.usecase.controller.dto.login.LogoutRequest;
+import com.example.stew.core.api.usecase.controller.dto.login.LogoutResponse;
 import com.example.stew.core.dto.session.SessionInfo;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,5 +38,11 @@ public class LoginService {
         session.setAttribute("SESSION_INFO", sessionInfo);
 
         return new LoginResponse(true, "ログイン成功");
+    }
+
+    public LogoutResponse logout(LogoutRequest request, HttpSession session) {
+        // セッション破棄
+        session.invalidate();
+        return new LogoutResponse();
     }
 }
