@@ -6,9 +6,17 @@ spring:
     username: appuser
     password: password
     driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 mybatis:
   mapper-locations: classpath:com/example/stew/**/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
+server:
+  servlet:
+    session:
+      timeout: 30m
