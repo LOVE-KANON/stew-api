@@ -4,11 +4,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.stew.core.api.resource.entity.CoreUserEntity;
 import com.example.stew.core.api.resource.mapper.CoreUserMapper;
+import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserRequest;
+import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.LoginRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.LoginResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.LogoutRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.LogoutResponse;
 import com.example.stew.core.dto.session.SessionInfo;
+import com.example.stew.core.helper.SessionHelper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -54,5 +57,18 @@ public class AuthService {
         session.invalidate();
         return response;
     }
+
+    public GetAuthenticatedUserResponse getAuthenticatedUser(GetAuthenticatedUserRequest request) {
+
+        GetAuthenticatedUserResponse response = new GetAuthenticatedUserResponse();
+
+        // セッション情報に保持されているユーザ情報を取得
+        SessionInfo sessionInfo = SessionHelper.getSessionInfo();
+        if (sessionInfo != null) {
+            // セッション情報が存在する(ログイン済みの)場合
+            response.setUserId(sessionInfo.getUserId());
+            response.setUserName(sessionInfo.getUserName());
+        }
+        return response;
     }
 }
