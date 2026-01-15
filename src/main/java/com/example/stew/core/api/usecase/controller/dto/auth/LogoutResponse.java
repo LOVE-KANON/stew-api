@@ -1,4 +1,4 @@
-package com.example.stew.core.api.usecase.controller.dto.login;
+package com.example.stew.core.api.usecase.controller.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

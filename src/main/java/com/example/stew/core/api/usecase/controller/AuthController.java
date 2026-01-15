@@ -5,29 +5,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.stew.core.api.usecase.controller.dto.login.LoginRequest;
-import com.example.stew.core.api.usecase.controller.dto.login.LoginResponse;
-import com.example.stew.core.api.usecase.controller.dto.login.LogoutRequest;
-import com.example.stew.core.api.usecase.controller.dto.login.LogoutResponse;
-import com.example.stew.core.api.usecase.service.LoginService;
+import com.example.stew.core.api.usecase.controller.dto.auth.LoginRequest;
+import com.example.stew.core.api.usecase.controller.dto.auth.LoginResponse;
+import com.example.stew.core.api.usecase.controller.dto.auth.LogoutRequest;
+import com.example.stew.core.api.usecase.controller.dto.auth.LogoutResponse;
+import com.example.stew.core.api.usecase.service.AuthService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/core/usecase")
+@RequestMapping("/api/core/usecase/auth")
 @RequiredArgsConstructor
-public class LoginController {
+public class AuthController {
 
-    private final LoginService loginService;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request, HttpSession session) {
-        return loginService.login(request, session);
+        return authService.login(request, session);
     }
 
     @PostMapping("/logout")
     public LogoutResponse logout(@RequestBody LogoutRequest request, HttpSession session) {
-        return loginService.logout(request, session);
+        return authService.logout(request, session);
     }
 }

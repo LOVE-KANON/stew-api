@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.stew.core.api.resource.entity.CoreUserEntity;
 import com.example.stew.core.api.resource.mapper.CoreUserMapper;
-import com.example.stew.core.api.usecase.controller.dto.login.LoginRequest;
-import com.example.stew.core.api.usecase.controller.dto.login.LoginResponse;
-import com.example.stew.core.api.usecase.controller.dto.login.LogoutRequest;
-import com.example.stew.core.api.usecase.controller.dto.login.LogoutResponse;
+import com.example.stew.core.api.usecase.controller.dto.auth.LoginRequest;
+import com.example.stew.core.api.usecase.controller.dto.auth.LoginResponse;
+import com.example.stew.core.api.usecase.controller.dto.auth.LogoutRequest;
+import com.example.stew.core.api.usecase.controller.dto.auth.LogoutResponse;
 import com.example.stew.core.dto.session.SessionInfo;
 
 import jakarta.servlet.http.HttpSession;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class AuthService {
 
     private final CoreUserMapper coreUserMapper;
 
