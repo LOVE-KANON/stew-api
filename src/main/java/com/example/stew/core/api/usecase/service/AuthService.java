@@ -21,11 +21,15 @@ public class AuthService {
 
     public LoginResponse login(LoginRequest request, HttpSession session) {
 
+        LoginResponse response = new LoginResponse();
+
         // ユーザ情報取得
         CoreUserEntity user = coreUserMapper.findByPk(CoreUserEntity.builder().userId(request.getUserId()).build());
 
         if (user == null || !user.getPassword().equals(request.getPassword())) {
-            return new LoginResponse(false, "ログイン情報が不正です");
+            response.setSuccess(false);
+            response.setMessage("ログイン情報が不正です");
+            return response;
         }
 
         // セッション保存
@@ -37,12 +41,18 @@ public class AuthService {
         );
         session.setAttribute("SESSION_INFO", sessionInfo);
 
-        return new LoginResponse(true, "ログイン成功");
+        response.setSuccess(true);
+        response.setMessage("ログイン成功");
+        return response;
     }
 
     public LogoutResponse logout(LogoutRequest request, HttpSession session) {
+
+        LogoutResponse response = new LogoutResponse();
+
         // セッション破棄
         session.invalidate();
-        return new LogoutResponse();
+        return response;
+    }
     }
 }
