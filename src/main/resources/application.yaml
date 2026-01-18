@@ -13,6 +13,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:com/example/stew/**/mapper/*.xml
+  type-handlers-package: com.example.stew.core.handler.mybatis
   configuration:
     map-underscore-to-camel-case: true
 

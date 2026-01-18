@@ -1,5 +1,7 @@
 package com.example.stew.core.api.resource.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.stew.core.api.resource.entity.CoreUserEntity;
@@ -9,6 +11,8 @@ import com.example.stew.core.base.mapper.BaseMapper;
 public interface CoreUserMapper extends BaseMapper<CoreUserEntity> {
 
     CoreUserEntity findByPk(CoreUserEntity entity);
+
+    List<CoreUserEntity> select(CoreUserEntity entity);
 
     int insert(CoreUserEntity entity);
 

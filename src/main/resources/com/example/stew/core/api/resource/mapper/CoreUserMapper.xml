@@ -9,12 +9,15 @@
         resultType="com.example.stew.core.api.resource.entity.CoreUserEntity">
         select
             "USER_ID",
+            "USER_SEQ",
+            "JOINED_DATE",
+            "RETIRED_DATE",
             "SEI",
             "MEI",
+            "MAIL_ADDRESS",
             "PASSWORD",
-            "LAST_LOGIN",
-            "JOINED_DATE",
             "POSITION",
+            "LAST_LOGIN",
             "CREATE_USER",
             "CREATE_AT",
             "UPDATE_USER",
@@ -23,8 +26,86 @@
             "VERSION"
         from
             "CORE_USER"
-        where
-            "USER_ID" = #{userId}
+        <where>
+            and "USER_ID" = #{userId}
+            and "USER_SEQ" = #{userSeq}
+        </where>
+    </select>
+
+    <select
+        id="select"
+        parameterType="com.example.stew.core.api.resource.entity.CoreUserEntity"
+        resultType="com.example.stew.core.api.resource.entity.CoreUserEntity">
+        select
+            "USER_ID",
+            "USER_SEQ",
+            "JOINED_DATE",
+            "RETIRED_DATE",
+            "SEI",
+            "MEI",
+            "MAIL_ADDRESS",
+            "PASSWORD",
+            "POSITION",
+            "LAST_LOGIN",
+            "CREATE_USER",
+            "CREATE_AT",
+            "UPDATE_USER",
+            "UPDATE_AT",
+            "DELETE_FLG",
+            "VERSION"
+        from
+            "CORE_USER"
+        <where>
+            <if test="userId != null">
+                and "USER_ID" = #{userId}
+            </if>
+            <if test="userSeq != null">
+                and "USER_SEQ" = #{userSeq}
+            </if>
+            <if test="joinedDate != null">
+                and "JOINED_DATE" = #{joinedDate}
+            </if>
+            <if test="retiredDate != null">
+                and "RETIRED_DATE" = #{retiredDate}
+            </if>
+            <if test="sei != null and sei != ''">
+                and "SEI" = #{sei}
+            </if>
+            <if test="mei != null and mei != ''">
+                and "MEI" = #{mei}
+            </if>
+            <if test="mailAddress != null and mailAddress != ''">
+                and "MAIL_ADDRESS" = #{mailAddress}
+            </if>
+            <if test="password != null and password != ''">
+                and "PASSWORD" = #{password}
+            </if>
+            <if test="position != null and position != ''">
+                and "POSITION" = #{position}
+            </if>
+            <if test="lastLogin != null">
+                and "LAST_LOGIN" = #{lastLogin}
+            </if>
+            <!-- BaseEntity -->
+            <if test="createUser != null and createUser != ''">
+                and "CREATE_USER" = #{createUser}
+            </if>
+            <if test="createAt != null">
+                and "CREATE_AT" = #{createAt}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and "UPDATE_USER" = #{updateUser}
+            </if>
+            <if test="updateAt != null">
+                and "UPDATE_AT" = #{updateAt}
+            </if>
+            <if test="deleteFlg != null">
+                and "DELETE_FLG" = #{deleteFlg}
+            </if>
+            <if test="version != null">
+                and "VERSION" = #{version}
+            </if>
+        </where>
     </select>
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.example.stew.core.base.mapper;
 
+import java.util.List;
+
 import com.example.stew.core.base.entity.BaseEntity;
 
 /**
@@ -14,6 +16,13 @@ public interface BaseMapper<E extends BaseEntity> {
      * @return 検索結果
      */
     E findByPk(E entity);
+
+    /**
+     * 検索(イコール条件)
+     * @param entity
+     * @return 検索結果
+     */
+    List<E> select(E entity);
 
     /**
      * 登録

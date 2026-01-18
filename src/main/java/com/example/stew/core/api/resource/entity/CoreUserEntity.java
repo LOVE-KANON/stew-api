@@ -1,6 +1,7 @@
 package com.example.stew.core.api.resource.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.example.stew.core.base.entity.BaseEntity;
 
@@ -22,7 +23,16 @@ import lombok.experimental.SuperBuilder;
 public class CoreUserEntity extends BaseEntity {
 
     // ユーザID
-    private String userId;
+    private UUID userId;
+
+    // ユーザ連番
+    private Integer userSeq;
+
+    // 入社日
+    private LocalDateTime joinedDate;
+
+    // 退社日
+    private LocalDateTime retiredDate;
 
     // 姓
     private String sei;
@@ -30,15 +40,15 @@ public class CoreUserEntity extends BaseEntity {
     // 名
     private String mei;
 
+    // メールアドレス
+    private String mailAddress;
+
     // パスワード
     private String password;
 
-    // 最終ログイン日時
-    private LocalDateTime lastLogin;
-
-    // 登録日
-    private LocalDateTime joinedDate;
-
     // 役職
     private String position;
+
+    // 最終ログイン日時
+    private LocalDateTime lastLogin;
 }

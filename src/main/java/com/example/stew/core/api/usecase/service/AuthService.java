@@ -1,5 +1,7 @@
 package com.example.stew.core.api.usecase.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.stew.core.api.resource.entity.CoreUserEntity;
@@ -27,8 +29,11 @@ public class AuthService {
         LoginResponse response = new LoginResponse();
 
         // ユーザ情報取得
-        CoreUserEntity user = coreUserMapper.findByPk(CoreUserEntity.builder().userId(request.getUserId()).build());
-
+        List<CoreUserEntity> userList = coreUserMapper.select(CoreUserEntity.builder().mailAddress(request.getLoginId()).build());
+        CoreUserEntity user = null;
+        if (userList != null && !userList.isEmpty()) {
+            user = userList.get(0);
+        }
         if (user == null || !user.getPassword().equals(request.getPassword())) {
             response.setSuccess(false);
             response.setMessage("ログイン情報が不正です");
@@ -38,6 +43,7 @@ public class AuthService {
         // セッション保存
         SessionInfo sessionInfo = new SessionInfo(
                 user.getUserId(),
+                user.getMailAddress(),
                 user.getSei(),
                 user.getMei(),
                 user.getPosition()

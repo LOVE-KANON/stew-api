@@ -1,6 +1,7 @@
 package com.example.stew.core.dto.session;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,10 @@ public class SessionInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ユーザID */
-    private String userId;
+    private UUID userId;
+
+    /** メールアドレス */
+    private String mailAddress;
 
     /** 姓 */
     private String sei;
