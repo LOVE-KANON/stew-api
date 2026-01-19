@@ -1,18 +1,15 @@
 package com.example.stew.core.api.usecase.service;
 
-import java.util.Comparator;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.example.stew.core.api.resource.entity.CoreUserEntity;
-import com.example.stew.core.api.resource.mapper.CoreUserMapper;
 import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.LoginRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.LoginResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.LogoutRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.LogoutResponse;
+import com.example.stew.core.api.usecase.mapper.AuthMapper;
 import com.example.stew.core.dto.session.SessionInfo;
 import com.example.stew.core.helper.SessionHelper;
 
@@ -23,20 +20,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final CoreUserMapper coreUserMapper;
+    private final AuthMapper authMapper;
 
     public LoginResponse login(LoginRequest request, HttpSession session) {
 
         LoginResponse response = new LoginResponse();
 
         // ユーザ情報取得
-        List<CoreUserEntity> userList = coreUserMapper.find(CoreUserEntity.builder().mailAddress(request.getLoginId()).build());
-        CoreUserEntity user = null;
-        if (userList != null && !userList.isEmpty()) {
-            user = userList.stream()
-                    .max(Comparator.comparing(CoreUserEntity::getUserSeq))
-                    .orElseThrow();;
-        }
+        CoreUserEntity user = authMapper.getMaxSeqAuthUser(CoreUserEntity.builder().mailAddress(request.getLoginId()).build());
         if (user == null || !user.getPassword().equals(request.getPassword())) {
             response.setSuccess(false);
             response.setMessage("ログイン情報が不正です");
