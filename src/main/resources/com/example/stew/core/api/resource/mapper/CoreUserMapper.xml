@@ -33,7 +33,7 @@
     </select>
 
     <select
-        id="select"
+        id="find"
         parameterType="com.example.stew.core.api.resource.entity.CoreUserEntity"
         resultType="com.example.stew.core.api.resource.entity.CoreUserEntity">
         select

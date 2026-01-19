@@ -22,7 +22,7 @@ public interface BaseMapper<E extends BaseEntity> {
      * @param entity
      * @return 検索結果
      */
-    List<E> select(E entity);
+    List<E> find(E entity);
 
     /**
      * 登録

@@ -20,6 +20,9 @@ public class SessionInfo implements Serializable {
     /** ユーザID */
     private UUID userId;
 
+    /** ユーザ連番 */
+    private Integer userSeq;
+
     /** メールアドレス */
     private String mailAddress;
 

@@ -12,7 +12,7 @@ public interface CoreUserMapper extends BaseMapper<CoreUserEntity> {
 
     CoreUserEntity findByPk(CoreUserEntity entity);
 
-    List<CoreUserEntity> select(CoreUserEntity entity);
+    List<CoreUserEntity> find(CoreUserEntity entity);
 
     int insert(CoreUserEntity entity);
 
