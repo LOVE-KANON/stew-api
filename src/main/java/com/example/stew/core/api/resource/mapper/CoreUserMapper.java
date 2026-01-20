@@ -19,4 +19,6 @@ public interface CoreUserMapper extends BaseMapper<CoreUserEntity> {
     int updateByPk(CoreUserEntity entity);
 
     int logicalDeleteByPk(CoreUserEntity entity);
+
+    CoreUserEntity findMaxSeqUserByUserId(CoreUserEntity entity);
 }

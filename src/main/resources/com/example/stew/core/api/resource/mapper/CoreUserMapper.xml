@@ -108,4 +108,39 @@
         </where>
     </select>
 
+    <select
+        id="findMaxSeqUserByUserId"
+        parameterType="com.example.stew.core.api.resource.entity.CoreUserEntity"
+        resultType="com.example.stew.core.api.resource.entity.CoreUserEntity">
+        select
+            "USER_ID",
+            "USER_SEQ",
+            "JOINED_DATE",
+            "RETIRED_DATE",
+            "SEI",
+            "MEI",
+            "MAIL_ADDRESS",
+            "PASSWORD",
+            "POSITION",
+            "LAST_LOGIN",
+            "CREATE_USER",
+            "CREATE_AT",
+            "UPDATE_USER",
+            "UPDATE_AT",
+            "DELETE_FLG",
+            "VERSION"
+        from
+            "CORE_USER" cu
+        <where>
+            and "USER_ID" = #{userId}
+            and cu."USER_SEQ" =
+                (
+                    select max(cu_max_seq."USER_SEQ")
+                    from "CORE_USER" cu_max_seq
+                    where cu_max_seq."USER_ID" = cu."USER_ID"
+                )
+            and "RETIRED_DATE" is null
+        </where>
+    </select>
+
 </mapper>
