@@ -11,6 +11,7 @@ import com.example.stew.core.api.usecase.controller.dto.auth.LogoutRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.LogoutResponse;
 import com.example.stew.core.api.usecase.mapper.AuthMapper;
 import com.example.stew.core.dto.session.SessionInfo;
+import com.example.stew.core.exception.UnauthorizedException;
 import com.example.stew.core.helper.SessionHelper;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,9 +30,7 @@ public class AuthService {
         // ユーザ情報取得
         CoreUserEntity user = authMapper.getMaxSeqAuthUser(CoreUserEntity.builder().mailAddress(request.getLoginId()).build());
         if (user == null || !user.getPassword().equals(request.getPassword())) {
-            response.setSuccess(false);
-            response.setMessage("ログイン情報が不正です");
-            return response;
+            throw new UnauthorizedException("ログイン情報が不正です");
         }
 
         // セッション保存
@@ -45,8 +44,6 @@ public class AuthService {
         );
         session.setAttribute("SESSION_INFO", sessionInfo);
 
-        response.setSuccess(true);
-        response.setMessage("ログイン成功");
         return response;
     }
 
@@ -65,11 +62,12 @@ public class AuthService {
 
         // セッション情報に保持されているユーザ情報を取得
         SessionInfo sessionInfo = SessionHelper.getSessionInfo();
-        if (sessionInfo != null) {
-            // セッション情報が存在する(ログイン済みの)場合
-            response.setUserId(sessionInfo.getUserId());
-            response.setUserName(sessionInfo.getUserName());
+        if (sessionInfo == null) {
+            // セッション情報が存在しない(未ログインの)場合
+            throw new UnauthorizedException("セッション情報が取得できませんでした。");
         }
+        response.setUserId(sessionInfo.getUserId());
+        response.setUserName(sessionInfo.getUserName());
         return response;
     }
 }

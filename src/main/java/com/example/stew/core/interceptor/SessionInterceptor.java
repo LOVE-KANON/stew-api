@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.example.stew.core.dto.session.SessionInfo;
+import com.example.stew.core.exception.UnauthorizedException;
 import com.example.stew.core.helper.SessionHelper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,11 +23,12 @@ public class SessionInterceptor implements HandlerInterceptor {
                              Object handler) {
 
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            SessionInfo info =
-                (SessionInfo) session.getAttribute("SESSION_INFO");
-            SessionHelper.setSessionInfo(info);
+        if (session == null) {
+            throw new UnauthorizedException("セッション情報が取得できませんでした。");
         }
+        SessionInfo info =
+                (SessionInfo) session.getAttribute("SESSION_INFO");
+        SessionHelper.setSessionInfo(info);
         return true;
     }
 

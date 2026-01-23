@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.stew.core.api.dto.ApiResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserRequest;
 import com.example.stew.core.api.usecase.controller.dto.auth.GetAuthenticatedUserResponse;
 import com.example.stew.core.api.usecase.controller.dto.auth.LoginRequest;
@@ -25,17 +26,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request, HttpSession session) {
-        return authService.login(request, session);
+    public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request, HttpSession session) {
+        return new ApiResponse<LoginResponse>(authService.login(request, session));
     }
 
     @PostMapping("/logout")
-    public LogoutResponse logout(@RequestBody LogoutRequest request, HttpSession session) {
-        return authService.logout(request, session);
+    public ApiResponse<LogoutResponse> logout(@RequestBody LogoutRequest request, HttpSession session) {
+        return new ApiResponse<LogoutResponse>(authService.logout(request, session));
     }
 
     @GetMapping("/getAuthenticatedUser")
-    public GetAuthenticatedUserResponse getAuthenticatedUser(GetAuthenticatedUserRequest request) {
-        return authService.getAuthenticatedUser(request);
+    public ApiResponse<GetAuthenticatedUserResponse> getAuthenticatedUser(GetAuthenticatedUserRequest request) {
+        return new ApiResponse<GetAuthenticatedUserResponse>(authService.getAuthenticatedUser(request));
     }
 }

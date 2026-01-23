@@ -20,6 +20,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionInterceptor())
-                .addPathPatterns("/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/api/core/usecase/auth/login",
+                        "/api/core/usecase/auth/logout"
+                    );
     }
 }
