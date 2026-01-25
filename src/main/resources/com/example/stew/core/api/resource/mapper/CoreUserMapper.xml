@@ -143,4 +143,29 @@
         </where>
     </select>
 
+    <update
+        id="updateByPk"
+        parameterType="com.example.stew.core.api.resource.entity.CoreUserEntity">
+        update
+            "CORE_USER"
+        set
+            "JOINED_DATE" = #{joinedDate},
+            "RETIRED_DATE" = #{retiredDate},
+            "SEI" = #{sei},
+            "MEI" = #{mei},
+            "MAIL_ADDRESS" = #{mailAddress},
+            "PASSWORD" = #{password},
+            "POSITION" = #{position},
+            "LAST_LOGIN" = #{lastLogin},
+            "UPDATE_USER" = #{updateUser},
+            "UPDATE_AT" = #{updateAt},
+            "DELETE_FLG" = #{deleteFlg},
+            "VERSION" = "VERSION" + 1
+        <where>
+            and "USER_ID" = #{userId}
+            and "USER_SEQ" = #{userSeq}
+            and "VERSION" = #{version}
+        </where>
+    </update>
+
 </mapper>

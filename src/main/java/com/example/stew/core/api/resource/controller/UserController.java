@@ -1,12 +1,16 @@
 package com.example.stew.core.api.resource.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.stew.core.api.dto.ApiResponse;
 import com.example.stew.core.api.resource.controller.dto.user.GetMaxSeqUserByUserIdRequest;
 import com.example.stew.core.api.resource.controller.dto.user.GetMaxSeqUserByUserIdResponse;
+import com.example.stew.core.api.resource.controller.dto.user.UpdateRequest;
+import com.example.stew.core.api.resource.controller.dto.user.UpdateResponse;
 import com.example.stew.core.api.resource.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,5 +25,10 @@ public class UserController {
     @GetMapping("/getMaxSeqUserByUserId")
     public ApiResponse<GetMaxSeqUserByUserIdResponse> getMaxSeqUserByUserId(GetMaxSeqUserByUserIdRequest request) {
         return new ApiResponse<GetMaxSeqUserByUserIdResponse>(userService.getMaxSeqUserByUserId(request));
+    }
+
+    @PostMapping("/update")
+    public ApiResponse<UpdateResponse> update(@RequestBody UpdateRequest request) {
+        return new ApiResponse<UpdateResponse>(userService.update(request));
     }
 }
