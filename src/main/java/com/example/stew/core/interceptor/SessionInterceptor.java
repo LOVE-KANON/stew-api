@@ -22,6 +22,10 @@ public class SessionInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) {
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
+
         HttpSession session = request.getSession(false);
         if (session == null) {
             throw new UnauthorizedException("セッション情報が取得できませんでした。");
