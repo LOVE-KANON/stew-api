@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.stew.core.api.dto.ApiResponse;
 import com.example.stew.core.api.dto.Message;
+import com.example.stew.core.exception.ConflictException;
 import com.example.stew.core.exception.UnauthorizedException;
 
 @RestControllerAdvice
@@ -27,5 +28,13 @@ public class ApiErrorResponseHandler {
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .body(response);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ApiResponse<Void>> handleConflict(ConflictException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(new ApiResponse<Void>(null));
     }
 }
