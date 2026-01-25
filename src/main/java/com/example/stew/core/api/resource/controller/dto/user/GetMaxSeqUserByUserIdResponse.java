@@ -17,4 +17,5 @@ public class GetMaxSeqUserByUserIdResponse {
     private String password;
     private String position;
     private LocalDateTime lastLogin;
+    private Long version;
 }
