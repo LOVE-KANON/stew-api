@@ -149,17 +149,39 @@
         update
             "CORE_USER"
         set
-            "JOINED_DATE" = #{joinedDate},
-            "RETIRED_DATE" = #{retiredDate},
-            "SEI" = #{sei},
-            "MEI" = #{mei},
-            "MAIL_ADDRESS" = #{mailAddress},
-            "PASSWORD" = #{password},
-            "POSITION" = #{position},
-            "LAST_LOGIN" = #{lastLogin},
-            "UPDATE_USER" = #{updateUser},
-            "UPDATE_AT" = #{updateAt},
-            "DELETE_FLG" = #{deleteFlg},
+            <if test="joinedDate != null">
+                "JOINED_DATE" = #{joinedDate},
+            </if>
+            <if test="retiredDate != null">
+                "RETIRED_DATE" = #{retiredDate},
+            </if>
+            <if test="sei != null">
+                "SEI" = #{sei},
+            </if>
+            <if test="mei != null">
+                "MEI" = #{mei},
+            </if>
+            <if test="mailAddress != null">
+                "MAIL_ADDRESS" = #{mailAddress},
+            </if>
+            <if test="password != null">
+                "PASSWORD" = #{password},
+            </if>
+            <if test="position != null">
+                "POSITION" = #{position},
+            </if>
+            <if test="lastLogin != null">
+                "LAST_LOGIN" = #{lastLogin},
+            </if>
+            <if test="updateUser != null">
+                "UPDATE_USER" = #{updateUser},
+            </if>
+            <if test="updateAt != null">
+                "UPDATE_AT" = #{updateAt},
+            </if>
+            <if test="deleteFlg != null">
+                "DELETE_FLG" = #{deleteFlg},
+            </if>
             "VERSION" = "VERSION" + 1
         <where>
             and "USER_ID" = #{userId}
