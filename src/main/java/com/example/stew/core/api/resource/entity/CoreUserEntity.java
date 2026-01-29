@@ -29,10 +29,10 @@ public class CoreUserEntity extends BaseEntity {
     private Integer userSeq;
 
     // 入社日
-    private LocalDateTime joinedDate;
+    private String joinedDate;
 
     // 退社日
-    private LocalDateTime retiredDate;
+    private String retiredDate;
 
     // 姓
     private String sei;

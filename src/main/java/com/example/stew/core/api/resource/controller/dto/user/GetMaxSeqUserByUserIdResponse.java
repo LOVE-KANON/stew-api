@@ -9,8 +9,8 @@ import lombok.Data;
 public class GetMaxSeqUserByUserIdResponse {
     private UUID userId;
     private Integer userSeq;
-    private LocalDateTime joinedDate;
-    private LocalDateTime retiredDate;
+    private String joinedDate;
+    private String retiredDate;
     private String sei;
     private String mei;
     private String mailAddress;

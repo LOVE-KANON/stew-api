@@ -11,7 +11,6 @@ import com.example.stew.core.api.resource.entity.CoreUserEntity;
 import com.example.stew.core.api.resource.mapper.CoreUserMapper;
 import com.example.stew.core.exception.ConflictException;
 import com.example.stew.core.helper.DefaultDatabaseHelper;
-import com.example.stew.core.utils.DateUtils;
 import com.example.stew.core.utils.NumberUtils;
 import com.example.stew.core.utils.UUIDUtils;
 
@@ -47,8 +46,8 @@ public class UserService {
         CoreUserEntity updateEntity = new CoreUserEntity();
         updateEntity.setUserId(UUIDUtils.toUUID(request.getUserId()));
         updateEntity.setUserSeq(NumberUtils.toInt(request.getUserSeq()));
-        updateEntity.setJoinedDate(DateUtils.toLocalDateTime(request.getJoinedDate(), DateUtils.FORMAT_SLASH_YMD_COLON_HMS));
-        updateEntity.setRetiredDate(DateUtils.toLocalDateTime(request.getRetiredDate(), DateUtils.FORMAT_SLASH_YMD_COLON_HMS));
+        updateEntity.setJoinedDate(request.getJoinedDate());
+        updateEntity.setRetiredDate(request.getRetiredDate());
         updateEntity.setSei(request.getSei());
         updateEntity.setMei(request.getMei());
         updateEntity.setMailAddress(request.getMailAddress());
