@@ -11,6 +11,9 @@ import com.example.stew.core.api.resource.entity.CoreUserEntity;
 import com.example.stew.core.api.resource.mapper.CoreUserMapper;
 import com.example.stew.core.exception.ConflictException;
 import com.example.stew.core.helper.DefaultDatabaseHelper;
+import com.example.stew.core.utils.DateUtils;
+import com.example.stew.core.utils.NumberUtils;
+import com.example.stew.core.utils.UUIDUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +30,7 @@ public class UserService {
 
         // ユーザIDに紐づくMAX(ユーザ連番)のレコード取得
         CoreUserEntity user = coreUserMapper.findMaxSeqUserByUserId(CoreUserEntity.builder()
-                .userId(request.getUserId())
+                .userId(UUIDUtils.toUUID(request.getUserId()))
                 .build());
         if (user == null) {
             return response;
@@ -42,7 +45,16 @@ public class UserService {
 
         // PK更新
         CoreUserEntity updateEntity = new CoreUserEntity();
-        BeanUtils.copyProperties(request, updateEntity);
+        updateEntity.setUserId(UUIDUtils.toUUID(request.getUserId()));
+        updateEntity.setUserSeq(NumberUtils.toInt(request.getUserSeq()));
+        updateEntity.setJoinedDate(DateUtils.toLocalDateTime(request.getJoinedDate(), DateUtils.FORMAT_SLASH_YMD_COLON_HMS));
+        updateEntity.setRetiredDate(DateUtils.toLocalDateTime(request.getRetiredDate(), DateUtils.FORMAT_SLASH_YMD_COLON_HMS));
+        updateEntity.setSei(request.getSei());
+        updateEntity.setMei(request.getMei());
+        updateEntity.setMailAddress(request.getMailAddress());
+        updateEntity.setPassword(request.getPassword());
+        updateEntity.setPosition(request.getPosition());
+        updateEntity.setVersion(NumberUtils.toLong(request.getVersion()));
         int count = databaseHelper.update(updateEntity, coreUserMapper);
         if (count == 0) {
             throw new ConflictException("他のユーザによって更新された可能性があります");
